@@ -1,12 +1,13 @@
 package com.turalllb.primeNumbers.ui.mainActivity
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -14,6 +15,7 @@ import android.widget.TextView
 import com.turalllb.primeNumbers.R
 import com.turalllb.primeNumbers.ui.MyApplication.Companion.INSTANCE
 import com.turalllb.primeNumbers.ui.mainActivity.adapter.AdapterPrimeNumbers
+
 
 class MainActivity : AppCompatActivity(), MainView {
     lateinit var presenter: Presenter<MainView>
@@ -63,7 +65,7 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     fun onClickCalculate(v: View?) {
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN) //не работает
+        hideKeyboard()
         val input = editText.text.toString()
         if (!input.equals("")) {
             presenter.clickCalculate(input.toLong())
@@ -114,6 +116,15 @@ class MainActivity : AppCompatActivity(), MainView {
                 calculateBt.isEnabled = state
             }.run()
         }
+    }
+
+    private fun hideKeyboard(){
+        val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = getCurrentFocus()
+        if (view == null) {
+            view = View(this)
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
     }
 }
 
