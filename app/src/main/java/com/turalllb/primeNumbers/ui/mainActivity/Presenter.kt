@@ -11,6 +11,7 @@ class Presenter<V : MainView> : BasePresenter<V>() {
     internal var progressBarState: Boolean = false
 
 
+
     fun clickCalculate(n: Long) {
         setCalculationBtState(false)
         progressBarState = true
@@ -25,6 +26,7 @@ class Presenter<V : MainView> : BasePresenter<V>() {
             view.refreshData(primeNumbers, sumPrimeNumbers, timeElapsed)
             setCalculationBtState(true)
         }).start()
+        println(listOf(1, 2, 3) == listOf(1, 2, 3))
     }
 
 
@@ -52,7 +54,8 @@ class Presenter<V : MainView> : BasePresenter<V>() {
         return true
     }
 
-    private fun setCalculationBtState (state: Boolean){
+
+    private fun setCalculationBtState(state: Boolean) {
         calculationBtState = state
         view.calculateBtSetEnabled(calculationBtState)
     }
