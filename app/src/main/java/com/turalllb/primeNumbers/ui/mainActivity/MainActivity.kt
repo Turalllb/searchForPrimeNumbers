@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), MainView {
         progressBar = findViewById(R.id.progressBar)
         //endregion
 
-        progressBar.visibility = if(presenter.progressBarState) View.VISIBLE else View.INVISIBLE
+        progressBar.visibility = if (presenter.progressBarState) View.VISIBLE else View.INVISIBLE
 
         calculateBt.isEnabled = presenter.calculationBtState
         sumTv.text = getString(R.string.sum, presenter.sumPrimeNumbers)
@@ -67,10 +67,9 @@ class MainActivity : AppCompatActivity(), MainView {
     fun onClickCalculate(v: View?) {
         hideKeyboard()
         val input = editText.text.toString()
-        if (!input.equals("")) {
+        if (input != "") {
             presenter.clickCalculate(input.toLong())
         }
-
     }
 
 
@@ -118,7 +117,7 @@ class MainActivity : AppCompatActivity(), MainView {
         }
     }
 
-    private fun hideKeyboard(){
+    private fun hideKeyboard() {
         val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         var view = getCurrentFocus()
         if (view == null) {
@@ -126,5 +125,6 @@ class MainActivity : AppCompatActivity(), MainView {
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
     }
+
 }
 

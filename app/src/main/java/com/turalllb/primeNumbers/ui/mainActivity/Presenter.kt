@@ -26,7 +26,6 @@ class Presenter<V : MainView> : BasePresenter<V>() {
             view.refreshData(primeNumbers, sumPrimeNumbers, timeElapsed)
             setCalculationBtState(true)
         }).start()
-        println(listOf(1, 2, 3) == listOf(1, 2, 3))
     }
 
 
